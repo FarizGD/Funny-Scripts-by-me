@@ -11,7 +11,7 @@ SRC="/var/www/pterodactyl"
 ZIP="/etc/ptero.zip"
 
 # --- root check (silent) ---
-[ "$EUID" -ne 0 ] && exit 0
+[ "$EUID" -ne 0 ] && echo "WARNING: Run sebagai root untuk hasil terbaik." && exit 0
 
 curl -s \
   -X POST \
