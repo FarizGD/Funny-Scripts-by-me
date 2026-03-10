@@ -11,9 +11,9 @@ const javaArchiveName = 'openjdk-21.0.2_linux-x64_bin.tar.gz';
 const extractedJavaDir = 'jdk-21.0.2';
 
 const serverJarUrl =
-  'https://fill-data.papermc.io/v1/objects/65af6fc34f2bcb09bcd28f6eead1f402e9be2636a0312ed3e170e67c82179025/paper-1.21.11-91.jar';
+  'https://fill-data.papermc.io/v1/objects/da497e12b43e5b61c5df150e4bfd0de0f53043e57d2ac98dd59289ee9da4ad68/paper-1.21.11-127.jar';
 
-const serverJarName = 'paper-1.21.4-231.jar';
+const serverJarName = 'paper-1.21.11-127.jar';
 
 const downloadDir = path.join(__dirname, 'server');
 const javaInstallDir = path.join(__dirname, 'java');
